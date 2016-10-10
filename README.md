@@ -2,6 +2,6 @@
 
 To import this overlay just type:
 
-```sh
+```console
 root # layman -S && layman -a idokka
 ```
