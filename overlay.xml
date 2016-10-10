@@ -2,8 +2,8 @@
 <!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
 <repositories version="1.0">
   <repo quality="experimental" status="unofficial">
-    <name><![CDATA[nest]]></name>
-    <description lang="en"><![CDATA[nest]]></description>
+    <name><![CDATA[idokka]]></name>
+    <description lang="en"><![CDATA[idokka]]></description>
 	<homepage>https://github.com/idokka/portage</homepage>
 	<owner type="person">
 		<name>![CDATA[Oleksii Myronenko]]</name>
