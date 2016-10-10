@@ -1,0 +1,61 @@
+#!/sbin/openrc-run
+# Copyright 1999-2016 Gentoo Foundation
+# Copyright (C) 2013-2014 Jonathan Vasquez <fearedbliss@funtoo.org>
+# Copyright (C) 2014 Sandy McArthur <Sandy@McArthur.org>
+# Copyright (C) 2015 Scott Alfter <scott@alfter.us>
+# Copyright (C) 2016 Oleksii Myronenko <idokka@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+extra_commands="reload"
+
+depend() {
+	need localmount net
+	after bootmisc
+}
+
+start_pre() {
+	if [ ! -d $(dirname ${SYNC_PIDFILE}) ]; then
+		mkdir -p $(dirname ${SYNC_PIDFILE})
+		chown ${BTSYNC_USER}:${BTSYNC_GROUP} $(dirname ${SYNC_PIDFILE})
+	fi
+}
+
+start() {
+	ebegin "Starting ${NAME}"
+
+	start-stop-daemon \
+		--start \
+		--user "${BTSYNC_USER}" \
+		--group "${BTSYNC_GROUP}" \
+		--pidfile "${SYNC_PIDFILE} \
+		--nice 5 \
+		--ionice 3 \
+		--exec "${SYNC_BINARY}" \
+		-- ${SYNC_OPTS}
+
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping ${NAME}"
+
+	start-stop-daemon \
+		--stop \
+		--user "${BTSYNC_USER}" \
+		--group "${BTSYNC_GROUP}" \
+		--exec "${SYNC_BINARY}" \
+		--pidfile "${SYNC_PIDFILE} \
+		--wait 5000 \
+		--retry SIGTERM/5 
+
+	eend $?
+}
+
+reload() {
+	ebegin "Reloading ${NAME}"
+	start-stop-daemon \
+		--signal HUP \
+		--exec "${SYNC_BINARY}" \
+		--pidfile "${SYNC_PIDFILE}"
+	eend $?
+}

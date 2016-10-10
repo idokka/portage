@@ -1,0 +1,12 @@
+# conf.d file for rslsync
+
+# User and group daemon runs as
+RSLSYNC_USER="rslsync"
+RSLSYNC_GROUP="rslsync"
+
+NAME="Resilio Sync"
+SYNC_NAME="rslsync"
+SYNC_PATH="/opt/${SYNC_NAME}/"
+SYNC_BINARY="${SYNC_PATH}/${SYNC_NAME}"
+SYNC_OPTS="--config /etc/${SYNC_NAME}/config"
+SYNC_PIDFILE="/var/run/rslsync/${SYNC_NAME}.pid"

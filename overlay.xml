@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name><![CDATA[nest]]></name>
+    <description lang="en"><![CDATA[nest]]></description>
+	<homepage>https://github.com/idokka/portage</homepage>
+	<owner type="person">
+		<name>![CDATA[Oleksii Myronenko]]</name>
+		<email>idokka@gmail.com</email>
+	</owner>
+    <source type="git">git://https://github.com:idokka/portage.git</source>
+    <feed>https://github.com/idokka/portage/commits/master.atom</feed>
+  </repo>
+</repositories>
