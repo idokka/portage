@@ -25,20 +25,20 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
-QA_PREBUILT="opt/rslsync/rslsync"
+QA_PREBUILT="opt/${NAME}/${NAME}"
 
 S="${WORKDIR}"
 
 pkg_setup() {
-	enewgroup rslsync
-	enewuser rslsync -1 -1 -1 "rslsync" --system
+	enewgroup ${NAME}
+	enewuser ${NAME} -1 -1 /opt/${NAME} ${NAME}
 }
 
 src_install() {
 	einfo dodir "/opt/${NAME}"
 	dodir "/opt/${NAME}"
 	exeinto "/opt/${NAME}"
-	doexe rslsync
+	doexe ${NAME}
 	insinto "/opt/${NAME}"
 	doins LICENSE.TXT
 
@@ -46,7 +46,7 @@ src_install() {
 	dodir "/etc/init.d"
 	insinto "/etc/init.d"
 	doins "${FILESDIR}/init.d/${NAME}"
-	fperms 755 /etc/init.d/rslsync
+	fperms 755 /etc/init.d/${NAME}
 
 	einfo dodir "/etc/conf.d"
 	dodir "/etc/conf.d"
@@ -55,22 +55,22 @@ src_install() {
 
 	einfo dodir "/etc/${NAME}"
 	dodir "/etc/${NAME}"
-	"${D}/opt/rslsync/rslsync" --dump-sample-config > "${D}/etc/${NAME}/config"
+	"${D}/opt/${NAME}/${NAME}" --dump-sample-config > "${D}/etc/${NAME}/config"
 	sed -i 's|// "pid_file"|   "pid_file"|' "${D}/etc/${NAME}/config"
-	fowners rslsync "/etc/${NAME}/config"
+	fowners ${NAME} "/etc/${NAME}/config"
 	fperms 460 "/etc/${NAME}/config"
 }
 
 pkg_preinst() {
 	# Customize for local machine
 	# Set device name to `hostname`
-	sed -i "s/My Sync Device/$(hostname) Gentoo Linux/"  "${D}/etc/rslsync/config"
-	# Update defaults to the rslsync's home dir
-	sed -i "s|/home/user|$(egethome rslsync)|"  "${D}/etc/rslsync/config"
+	sed -i "s/My Sync Device/$(hostname) Gentoo Linux/"  "${D}/etc/${NAME}/config"
+	# Update defaults to the ${NAME}'s home dir
+	sed -i "s|/home/user|$(egethome ${NAME})|"  "${D}/etc/${NAME}/config"
 }
 
 pkg_postinst() {
-	elog "Init scripts launch rslsync daemon as rslsync:rslsync "
+	elog "Init scripts launch ${NAME} daemon as ${NAME}:${NAME} "
 	elog "Please review/tweak /etc/${NAME}/config for default configuration."
 	elog "Default web-gui URL is http://localhost:8888/ ."
 }
