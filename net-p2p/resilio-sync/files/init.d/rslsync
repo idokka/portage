@@ -16,7 +16,7 @@ depend() {
 start_pre() {
 	if [ ! -d $(dirname ${SYNC_PIDFILE}) ]; then
 		mkdir -p $(dirname ${SYNC_PIDFILE})
-		chown ${BTSYNC_USER}:${BTSYNC_GROUP} $(dirname ${SYNC_PIDFILE})
+		chown ${RSLSYNC_USER}:${RSLSYNC_GROUP} $(dirname ${SYNC_PIDFILE})
 	fi
 }
 
@@ -25,9 +25,9 @@ start() {
 
 	start-stop-daemon \
 		--start \
-		--user "${BTSYNC_USER}" \
-		--group "${BTSYNC_GROUP}" \
-		--pidfile "${SYNC_PIDFILE} \
+		--user "${RSLSYNC_USER}" \
+		--group "${RSLSYNC_GROUP}" \
+		--pidfile "${SYNC_PIDFILE}" \
 		--nice 5 \
 		--ionice 3 \
 		--exec "${SYNC_BINARY}" \
@@ -41,10 +41,10 @@ stop() {
 
 	start-stop-daemon \
 		--stop \
-		--user "${BTSYNC_USER}" \
-		--group "${BTSYNC_GROUP}" \
+		--user "${RSLSYNC_USER}" \
+		--group "${RSLSYNC_GROUP}" \
 		--exec "${SYNC_BINARY}" \
-		--pidfile "${SYNC_PIDFILE} \
+		--pidfile "${SYNC_PIDFILE}" \
 		--wait 5000 \
 		--retry SIGTERM/5 
 
