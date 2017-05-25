@@ -27,7 +27,6 @@ start() {
 		--start \
 		--user "${RSLSYNC_USER}" \
 		--group "${RSLSYNC_GROUP}" \
-		--pidfile "${SYNC_PIDFILE}" \
 		--nice 5 \
 		--ionice 3 \
 		--exec "${SYNC_BINARY}" \
