@@ -9,7 +9,7 @@
 		<name>![CDATA[Oleksii Myronenko]]</name>
 		<email>idokka@gmail.com</email>
 	</owner>
-    <source type="git">git://github.com/idokka/portage.git</source>
+    <source type="git">https://github.com/idokka/portage.git</source>
     <feed>https://github.com/idokka/portage/commits/master.atom</feed>
   </repo>
 </repositories>
